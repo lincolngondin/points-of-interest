@@ -1,5 +1,7 @@
 package poi
 
+import "math"
+
 type POI struct {
 	Name string `json:"nome_do_poi"`
 	X    int64  `json:"x_coordenada"`
@@ -24,4 +26,10 @@ func NewDefaultPOI() *POI {
 
 func (poi *POI) IsValid() bool {
 	return poi.Name != "" && poi.X >= 0 && poi.Y >= 0
+}
+
+func (poi *POI) Distance(ref *point) float64 {
+    xS := float64((poi.X - ref.X)*(poi.X - ref.X))
+    yS := float64((poi.Y - ref.Y)*(poi.Y - ref.Y))
+	return math.Sqrt(xS+yS)
 }
