@@ -29,7 +29,7 @@ func (poi *POI) IsValid() bool {
 }
 
 func (poi *POI) Distance(ref *point) float64 {
-    xS := float64((poi.X - ref.X)*(poi.X - ref.X))
-    yS := float64((poi.Y - ref.Y)*(poi.Y - ref.Y))
-	return math.Sqrt(xS+yS)
+	xS := float64((poi.X - ref.X) * (poi.X - ref.X))
+	yS := float64((poi.Y - ref.Y) * (poi.Y - ref.Y))
+	return math.Sqrt(xS + yS)
 }

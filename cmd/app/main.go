@@ -8,23 +8,23 @@ import (
 	"os"
 	"os/signal"
 
+	_ "github.com/lib/pq"
 	"github.com/lincolngondin/points-of-interest/config"
 	"github.com/lincolngondin/points-of-interest/internal/poi"
-    _ "github.com/lib/pq"
 )
 
 func main() {
-    configs := config.New()
-    db, err := sql.Open(configs.DBDriverName, configs.DBDataSourceName)
-    if err != nil {
-        log.Fatal(err)
-    }
+	configs := config.New()
+	db, err := sql.Open(configs.DBDriverName, configs.DBDataSourceName)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 
-    poiRepo := poi.NewRepository(db)
-    poiService := poi.NewService(poiRepo)
+	poiRepo := poi.NewRepository(db)
+	poiService := poi.NewService(poiRepo)
 	poiHandler := poi.NewHandler(poiService)
 
 	mux := http.NewServeMux()
